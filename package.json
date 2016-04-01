@@ -1,0 +1,32 @@
+{
+  "name": "multer-resizer",
+  "version": "0.0.1",
+  "description": "An extension for multer that resizes uploaded images.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mertdogar/multer-resizer.git"
+  },
+  "keywords": [
+    "resize",
+    "cover",
+    "thumbnail",
+    "multer",
+    "image",
+    "lwip"
+  ],
+  "author": "Mert Dogar <mertdogar@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mertdogar/multer-resizer/issues"
+  },
+  "homepage": "https://github.com/mertdogar/multer-resizer#readme",
+  "dependencies": {
+    "async-q": "^0.3.1",
+    "lodash": "^4.7.0",
+    "lwip": "0.0.8"
+  }
+}
