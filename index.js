@@ -21,8 +21,8 @@ class Resizer {
     }
 
 
-    createThumbnail(filePath, options) {
-        const suffix = options.suffix || 'thumbnail';
+    createCover(filePath, options) {
+        const suffix = options.suffix || 'cover';
         const interpolation = options.interpolation || 'linear';
         const format = options.format || 'png';
         const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.png`;
@@ -35,8 +35,8 @@ class Resizer {
     }
 
 
-    createCover(filePath, options) {
-        const suffix = options.suffix || 'cover';
+    createResized(filePath, options) {
+        const suffix = options.suffix || 'resized';
         const interpolation = options.interpolation || 'linear';
         const format = options.format || 'png';
         const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.png`;
@@ -68,10 +68,10 @@ class Resizer {
 
     processImage(filePath, attachBase) {
         const jobs = _.map(this.options.tasks, task => {
-            if (_.isObject(task.cover)) {
+            if (_.isObject(task.resize)) {
+                return _ => this.createResized(filePath, task.resize).then(path => attachBase.resizedPath = path);
+            } else if (_.isObject(task.cover)) {
                 return _ => this.createCover(filePath, task.cover).then(path => attachBase.coverPath = path);
-            } else if (_.isObject(task.thumbnail)) {
-                return _ => this.createThumbnail(filePath, task.thumbnail).then(path => attachBase.thumbnailPath = path);
             }
         });
 
