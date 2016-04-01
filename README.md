@@ -1,9 +1,9 @@
 # Multer Resizer
 
-Multer Resizer is an addon for the commonly used express library multer. It extends the file upload feature of multer and transforms resizing-uploaded-images to a piece of cake.
+Multer Resizer is an addon for the commonly used express library multer. It extends the file upload feature of multer and transforms images resizing to a piece of cake.
 
 Traditional image upload using multer:
-```
+```javascript
 app.post('/profile', upload.single('avatar'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
@@ -11,16 +11,25 @@ app.post('/profile', upload.single('avatar'), function (req, res, next) {
 ```
 
 With Multer Resizer, you get the original file and also additional resized versions of it:
-```
+```javascript
 app.post('/profile', resizer.single(upload, 'avatar'), function (req, res, next) {
   // req.file is the `avatar` file
-  // req.file.coverPath, req.file.thumbnailPath etc...
+  // req.file.coverPath, req.file.resizedPath etc...
 })
 ```
 
+### Installation
+I am not going to publish my projects to npm anymore. You can install multer-resizer through this github repository using the command below:
+
+```sh
+$ npm install mertdogar/multer-resizer
+
+```
+
+
 ### Configurations
 Configuring multer resizer is easy, just declare tasks in an array. Any number of tasks are accepted.
-```
+```javascript
 const MulterResizer = require('multer-resizer');
 const resizer = new MulterResizer({
     tasks: [
@@ -35,7 +44,7 @@ Resizes an image. The image is resized to the given dimension and the aspect rat
 
 ###### Usage
 
-```
+```javascript
 {
     resize: {
         width: 1920,
@@ -58,7 +67,7 @@ Option | Description
 Cover a canvas with the image. The image will be resized to the smallest possible size such that both its dimensions are bigger than the canvas's dimensions. Margins of the image exceeding the canvas will be discarded.
 ###### Usage
 
-```
+```javascript
 {
     cover: {
         width: 800,
@@ -78,7 +87,7 @@ Option | Description
 *height* | Height in pixels
 
 ### Example
-```
+```javascript
 const multer = require('multer');
 const uploader = multer({
     storage: multer.diskStorage({destination: './'})
