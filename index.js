@@ -79,10 +79,12 @@ class Resizer {
     }
 
 
-    single(multerInstance, filename) {
+    single(filename) {
         const that = this;
         return function(req, res, next) {
-            multerInstance.single(filename)(req, res, err => {
+            if (!that.options.multer)
+                next(new Error('multer is undefined, please provide one at configuration.'));
+            that.options.multer.single(filename)(req, res, err => {
                 that
                     .processImage(req.file.path, req.file)
                     .then(_ => next())
@@ -92,10 +94,12 @@ class Resizer {
     }
 
 
-    array(multerInstance, filename, maxCount) {
+    array(filename, maxCount) {
         const that = this;
         return function(req, res, next) {
-            multerInstance.array(filename, maxCount)(req, res, err => {
+            if (!that.options.multer)
+                next(new Error('multer is undefined, please provide one at configuration.'));
+            that.options.multer.array(filename, maxCount)(req, res, err => {
                 async
                     .eachSeries(req.files,
                         file => that.processImage(file.path, file))
@@ -108,7 +112,8 @@ class Resizer {
 
 
 Resizer.defaultOptions = {
-    tasks: []
+    tasks: [],
+    multer: null
 };
 
 
