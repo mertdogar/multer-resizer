@@ -12,7 +12,7 @@ app.post('/profile', upload.single('avatar'), function (req, res, next) {
 
 With Multer Resizer, you get the original file and also additional resized versions of it:
 ```javascript
-app.post('/profile', resizer.single(upload, 'avatar'), function (req, res, next) {
+app.post('/profile', resizer.single('avatar'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.file.coverPath, req.file.resizedPath etc...
 })
@@ -32,6 +32,7 @@ Configuring multer resizer is easy, just declare tasks in an array. Any number o
 ```javascript
 const MulterResizer = require('multer-resizer');
 const resizer = new MulterResizer({
+    multer: uploader,
     tasks: [
         {...},
         {...}
@@ -89,11 +90,9 @@ Option | Description
 ### Example
 ```javascript
 const multer = require('multer');
-const uploader = multer({
-    storage: multer.diskStorage({destination: './'})
-});
 const MulterResizer = require('multer-resizer');
 const resizer = new MulterResizer({
+    multer: multer({storage: multer.diskStorage({destination: './'})}),
     tasks: [
         {
             resize: {
@@ -119,7 +118,7 @@ const resizer = new MulterResizer({
     ]
 });
 
-router.post('/', auth.ensureAuthentication, resizer.single(uploader, 'file'), function(req, res, next) {
+router.post('/', auth.ensureAuthentication, resizer.single('file'), function(req, res, next) {
     // All multer-resizer tasks were completed
 });
 
