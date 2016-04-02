@@ -39,6 +39,11 @@ const resizer = new MulterResizer({
     ]
 });
 ```
+#### Multer Instance
+Multer resizer is not a multipart file handler, it just extends an existing multer instance. Therefore, you must provide a properly configured multer instance to make it work.
+```javascript
+    multer: uploader
+```
 #### Tasks
 ##### Resize
 Resizes an image. The image is resized to the given dimension and the aspect ratio of the resized version may not be the same with the original image.
