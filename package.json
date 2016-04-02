@@ -1,6 +1,6 @@
 {
   "name": "multer-resizer",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "An extension for multer that resizes uploaded images.",
   "main": "index.js",
   "scripts": {
