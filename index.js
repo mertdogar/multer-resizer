@@ -75,7 +75,7 @@ class Resizer {
             }
         });
 
-        return async.series(jobs)
+        return async.series(jobs);
     }
 
 
