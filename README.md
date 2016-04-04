@@ -1,6 +1,6 @@
 # Multer Resizer
 
-Multer Resizer is an addon for the commonly used express library multer. It extends the file upload feature of multer and transforms images resizing to a piece of cake.
+Multer Resizer is an addon for the commonly used express library multer. It extends the file upload feature of multer and transforms image-resizing to a piece of cake.
 
 Traditional image upload using multer:
 ```javascript
