@@ -84,6 +84,9 @@ class Resizer {
             if (!this.options.multer)
                 return next(new Error('multer is undefined, please provide one at configuration.'));
             this.options.multer.single(filename)(req, res, err => {
+                if (!_.isObject(req.file))
+                    return next(new Error('Uploaded file not found.'));
+
                 this
                     .processImage(req.file.path, req.file)
                     .then(_ => next())
@@ -99,6 +102,9 @@ class Resizer {
                 return next(new Error('multer is undefined, please provide one at configuration.'));
 
             this.options.multer.array(filename, maxCount)(req, res, err => {
+                if (!_.isObject(req.files))
+                    return next(new Error('Uploaded files not found.'));
+
                 async
                     .eachSeries(req.files,
                         file => this.processImage(file.path, file))
