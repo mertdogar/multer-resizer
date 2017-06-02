@@ -25,7 +25,7 @@ class Resizer {
         const suffix = options.suffix || 'cover';
         const interpolation = options.interpolation || 'linear';
         const format = options.format || 'png';
-        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.png`;
+        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.${format}`;
 
         return lwip
             .openAsync(filePath)
@@ -39,7 +39,7 @@ class Resizer {
         const suffix = options.suffix || 'resized';
         const interpolation = options.interpolation || 'linear';
         const format = options.format || 'png';
-        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.png`;
+        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.${format}`;
 
         return lwip
             .openAsync(filePath)
@@ -85,7 +85,7 @@ class Resizer {
                 return next(new Error('multer is undefined, please provide one at configuration.'));
             this.options.multer.single(filename)(req, res, err => {
                 if (!_.isObject(req.file))
-                    return next(new Error('Uploaded file not found.'));
+                    return next(err);
 
                 this
                     .processImage(req.file.path, req.file)
@@ -103,7 +103,7 @@ class Resizer {
 
             this.options.multer.array(filename, maxCount)(req, res, err => {
                 if (!_.isObject(req.files))
-                    return next(new Error('Uploaded files not found.'));
+                    return next(err);
 
                 async
                     .eachSeries(req.files,
