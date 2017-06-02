@@ -25,7 +25,7 @@ class Resizer {
         const suffix = options.suffix || 'cover';
         const interpolation = options.interpolation || 'linear';
         const format = options.format || 'png';
-        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.png`;
+        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.${format}`;
 
         return lwip
             .openAsync(filePath)
@@ -39,7 +39,7 @@ class Resizer {
         const suffix = options.suffix || 'resized';
         const interpolation = options.interpolation || 'linear';
         const format = options.format || 'png';
-        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.png`;
+        const dstPath = this.getPathWithoutExtension(filePath) + `_${suffix}.${format}`;
 
         return lwip
             .openAsync(filePath)
